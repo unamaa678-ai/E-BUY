@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-BUY Online Store — Gadgets that make you smile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F7FB;
+    --surface:#FFFFFF;
+    --ink:#1A1A2E;
+    --muted:#6B6B80;
+    --line:#EAE8F2;
+    --blue:#3D5AFE;
+    --blue-soft:#E7EBFF;
+    --coral:#FF6B6B;
+    --coral-soft:#FFE7E7;
+    --yellow:#FFC93C;
+    --yellow-soft:#FFF6DC;
+    --grape:#8C54FF;
+    --grape-soft:#F0E8FF;
+    --mint:#2EC4B6;
+    --mint-soft:#E1F8F6;
+    --radius:20px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'Space Mono', monospace;
+  }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  img,svg{ display:block; max-width:100%; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* Announcement bar */
+  .announce{
+    background:linear-gradient(90deg, var(--ink) 0%, #2a2a45 50%, var(--ink) 100%);
+    background-size:200% 100%;
+    animation:shimmerBar 6s ease-in-out infinite;
+    color:#fff;
+    text-align:center;
+    font-size:13px;
+    font-weight:600;
+    padding:10px 16px;
+    letter-spacing:0.02em;
+  }
+  @keyframes shimmerBar{
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .announce{ animation:none; }
+  }
+
+  /* Header */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(248,247,251,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 24px;
+  }
+  .logo{
+    font-family:'Fredoka', sans-serif;
+    font-weight:700;
+    font-size:24px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .logo .dot{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--coral);
+    display:inline-block;
+  }
+  .nav-links{
+    display:flex;
+    gap:32px;
+    font-weight:600;
+    font-size:15px;
+  }
+  .nav-links a{ opacity:0.75; transition:opacity .2s; }
+  .nav-links a:hover{ opacity:1; }
+  .nav-right{ display:flex; align-items:center; gap:18px; }
+  .cart-btn{
+    position:relative;
+    width:44px; height:44px;
+    border-radius:50%;
+    background:var(--ink);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .cart-count{
+    position:absolute;
+    top:-4px; right:-4px;
+    background:var(--coral);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    width:20px; height:20px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    border:2px solid var(--bg);
+  }
+  @keyframes cartBounce{
+    0%{ transform:scale(1); }
+    30%{ transform:scale(1.25) rotate(-8deg); }
+    60%{ transform:scale(0.95) rotate(4deg); }
+    100%{ transform:scale(1) rotate(0deg); }
+  }
+  .cart-btn.bounce{ animation:cartBounce .5s ease; }
+
+  /* Hero */
+  .hero{
+    position:relative;
+    padding:80px 24px 60px;
+    overflow:hidden;
+  }
+  .hero-inner{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    align-items:center;
+    gap:40px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--yellow-soft);
+    color:#8a6300;
+    font-weight:700;
+    font-size:13px;
+    padding:8px 16px;
+    border-radius:999px;
+    margin-bottom:20px;
+  }
+  .hero h1{
+    font-size:clamp(38px, 5.2vw, 62px);
+    line-height:1.05;
+    margin-bottom:20px;
+  }
+  .hero h1 .accent{ color:var(--coral); }
+  .hero p.lead{
+    font-size:18px;
+    color:var(--muted);
+    max-width:460px;
+    margin-bottom:32px;
+    line-height:1.6;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 28px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:15px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:#fff;
+    box-shadow:0 8px 0 0 #0000, 0 6px 20px rgba(26,26,46,0.25);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); }
+  .btn-ghost{
+    background:var(--surface);
+    color:var(--ink);
+    border:2px solid var(--line);
+  }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  /* Floating blob visual */
+  .blob-field{
+    position:relative;
+    height:420px;
+  }
+  .blob{
+    position:absolute;
+    border-radius:42% 58% 65% 35% / 45% 45% 55% 55%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    animation:bob 6s ease-in-out infinite;
+  }
+  .blob svg{ width:46%; height:46%; }
+  .blob.b1{ width:190px; height:190px; background:var(--blue-soft); top:0; left:20%; animation-delay:0s;}
+  .blob.b2{ width:150px; height:150px; background:var(--coral-soft); top:40%; left:0; animation-delay:1.2s;}
+  .blob.b3{ width:210px; height:210px; background:var(--grape-soft); bottom:0; left:30%; animation-delay:0.6s;}
+  .blob.b4{ width:130px; height:130px; background:var(--mint-soft); top:10%; right:0; animation-delay:1.8s;}
+  .blob.b5{ width:120px; height:120px; background:var(--yellow-soft); bottom:10%; right:10%; animation-delay:0.9s;}
+  @keyframes bob{
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-18px) rotate(4deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .blob{ animation:none; }
+  }
+
+  /* Scroll reveal + entrance animations */
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(24px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .reveal{ opacity:0; }
+  .reveal.in-view{ animation:fadeUp .7s cubic-bezier(.22,1,.36,1) forwards; }
+  .reveal.d1{ animation-delay:.08s; }
+  .reveal.d2{ animation-delay:.16s; }
+  .reveal.d3{ animation-delay:.24s; }
+
+  .hero-inner > div:first-child > *{
+    opacity:0;
+    animation:fadeUp .7s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .hero-inner .eyebrow{ animation-delay:.05s; }
+  .hero-inner h1{ animation-delay:.15s; }
+  .hero-inner p.lead{ animation-delay:.25s; }
+  .hero-inner .hero-ctas{ animation-delay:.35s; }
+  .blob-field{ opacity:0; animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .2s forwards; }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal, .hero-inner > div:first-child > *, .blob-field{ animation:none !important; opacity:1 !important; }
+  }
+
+  /* Category strip */
+  .section{ padding:64px 24px; }
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin-bottom:32px;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .section-head h2{ font-size:30px; }
+  .section-head p{ color:var(--muted); font-size:15px; }
+
+  /* Product grid */
+  .prod-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+  }
+  .prod-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition:box-shadow .2s ease, transform .2s ease;
+  }
+  .prod-card:hover{ box-shadow:0 14px 30px rgba(26,26,46,0.08); transform:translateY(-3px); }
+  .prod-media{
+    height:160px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .prod-media svg{ width:64px; height:64px; }
+  .prod-media img{ width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
+  .prod-media.zoomable{ cursor:zoom-in; }
+  .zoom-hint{
+    position:absolute;
+    bottom:10px; left:50%;
+    transform:translateX(-50%) translateY(8px);
+    background:rgba(26,26,46,0.75);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    padding:5px 12px;
+    border-radius:999px;
+    opacity:0;
+    transition:opacity .2s ease, transform .2s ease;
+    pointer-events:none;
+    white-space:nowrap;
+  }
+  .prod-card:hover .zoom-hint{ opacity:1; transform:translateX(-50%) translateY(0); }
+  .prod-card:hover .prod-media img{ transform:scale(1.06); }
+  .tag{
+    position:absolute;
+    top:12px; left:12px;
+    font-size:11px;
+    font-weight:700;
+    padding:5px 10px;
+    border-radius:999px;
+    background:var(--ink);
+    color:#fff;
+  }
+  .prod-body{ padding:18px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .prod-cat{ font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  .prod-name{ font-weight:700; font-size:16px; }
+  .prod-bottom{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; padding-top:10px; }
+  .price{ font-weight:700; font-size:16px; }
+  .add-btn{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:var(--ink);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px;
+    transition:background .2s ease;
+  }
+  .add-btn:hover{ background:var(--coral); }
+
+  /* USP strip */
+  .usp-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+  }
+  .usp-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+  }
+  .usp-icon{
+    width:48px; height:48px;
+    border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .usp-icon svg{ width:24px; height:24px; }
+  .usp-card h3{ font-size:16px; margin-bottom:4px; }
+  .usp-card p{ font-size:14px; color:var(--muted); line-height:1.5; }
+
+  footer{
+    background:var(--ink);
+    color:#fff;
+    padding:56px 24px 28px;
+    margin-top:40px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:40px;
+    margin-bottom:40px;
+  }
+  footer .logo{ color:#fff; margin-bottom:12px; }
+  footer p{ color:#B7B6C6; font-size:14px; line-height:1.6; max-width:320px; }
+  footer h4{ font-size:14px; margin-bottom:14px; color:#fff; }
+  footer ul li{ margin-bottom:10px; }
+  footer ul li a{ color:#B7B6C6; font-size:14px; }
+  footer ul li a:hover{ color:#fff; }
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12);
+    padding-top:20px;
+    font-size:13px;
+    color:#8988A0;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* Cart drawer */
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(26,26,46,0.4);
+    opacity:0; pointer-events:none;
+    transition:opacity .25s ease;
+    z-index:90;
+  }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+  .drawer{
+    position:fixed;
+    top:0; right:0;
+    height:100%;
+    width:400px;
+    max-width:92vw;
+    background:var(--surface);
+    z-index:100;
+    transform:translateX(100%);
+    transition:transform .3s ease;
+    display:flex;
+    flex-direction:column;
+  }
+  .drawer.show{ transform:translateX(0); }
+  .drawer-head{
+    padding:22px 22px 16px;
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid var(--line);
+  }
+  .drawer-head h3{ font-size:20px; }
+  .close-btn{
+    width:34px; height:34px;
+    border-radius:50%;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px;
+  }
+  .cart-items{ flex:1; overflow-y:auto; padding:18px 22px; display:flex; flex-direction:column; gap:16px; }
+  .cart-empty{ color:var(--muted); font-size:14px; text-align:center; margin-top:40px; }
+  .cart-row{
+    display:flex; gap:12px; align-items:center;
+  }
+  .cart-row .thumb{
+    width:56px; height:56px; border-radius:14px;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .cart-row .thumb svg{ width:28px; height:28px; }
+  .cart-row .info{ flex:1; }
+  .cart-row .info .name{ font-weight:700; font-size:14px; }
+  .cart-row .info .price{ font-size:13px; color:var(--muted); font-weight:600; }
+  .qty-ctrl{
+    display:flex; align-items:center; gap:8px;
+    background:var(--bg);
+    border-radius:999px;
+    padding:4px 8px;
+  }
+  .qty-ctrl button{ font-weight:700; width:20px; }
+  .drawer-foot{
+    padding:20px 22px 26px;
+    border-top:1px solid var(--line);
+  }
+  .total-row{
+    display:flex; justify-content:space-between;
+    font-weight:700; font-size:16px;
+    margin-bottom:16px;
+  }
+  .checkout-btn{
+    width:100%;
+    background:var(--ink);
+    color:#fff;
+    padding:16px;
+    border-radius:14px;
+    font-weight:700;
+    text-align:center;
+  }
+  .checkout-btn:disabled{ opacity:0.4; cursor:not-allowed; }
+
+  /* Checkout modal */
+  .modal-overlay{
+    position:fixed; inset:0;
+    background:rgba(26,26,46,0.5);
+    display:none;
+    align-items:center; justify-content:center;
+    z-index:110;
+    padding:20px;
+  }
+  .modal-overlay.show{ display:flex; }
+  .modal{
+    background:var(--surface);
+    border-radius:24px;
+    width:100%;
+    max-width:460px;
+    max-height:90vh;
+    overflow-y:auto;
+    padding:28px;
+  }
+  .modal h3{ font-size:22px; margin-bottom:6px; }
+  .modal p.sub{ color:var(--muted); font-size:14px; margin-bottom:22px; }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:13px; font-weight:700; margin-bottom:6px; }
+  .field input, .field textarea{
+    width:100%;
+    padding:12px 14px;
+    border-radius:12px;
+    border:1.5px solid var(--line);
+    font-family:inherit;
+    font-size:14px;
+    background:var(--bg);
+  }
+  .field input:focus, .field textarea:focus{ outline:2px solid var(--blue); border-color:transparent; }
+  .pay-options{ display:flex; gap:10px; margin-bottom:6px; }
+  .pay-opt{
+    flex:1;
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+    text-align:center;
+    font-weight:700;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .pay-opt.active{ border-color:var(--ink); background:var(--bg); }
+  .bank-details{
+    background:var(--yellow-soft);
+    border-radius:14px;
+    padding:14px;
+    font-size:13px;
+    margin-top:10px;
+    line-height:1.6;
+    display:none;
+  }
+  .bank-details.show{ display:block; }
+  .place-btn{
+    width:100%;
+    background:#25D366;
+    color:#fff;
+    padding:16px;
+    border-radius:14px;
+    font-weight:700;
+    margin-top:8px;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .modal-close{
+    float:right;
+    width:32px; height:32px;
+    border-radius:50%;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  @media (max-width: 920px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .blob-field{ height:280px; }
+    .prod-grid{ grid-template-columns:repeat(2,1fr); }
+    .usp-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+    .nav-links{ display:none; }
+  }
+  @media (max-width: 480px){
+    .prod-grid{ grid-template-columns:1fr 1fr; gap:12px; }
+    .hero{ padding:50px 20px 40px; }
+    .logo img{ height:58px !important; }
+  }
+
+  /* Lightbox */
+  .lightbox-overlay{
+    position:fixed; inset:0;
+    background:rgba(10,10,18,0.94);
+    z-index:200;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    animation:fadeIn .2s ease;
+  }
+  .lightbox-overlay.show{ display:flex; }
+  @keyframes fadeIn{ from{ opacity:0; } to{ opacity:1; } }
+  .lb-stage{
+    width:100%;
+    max-width:640px;
+    height:60vh;
+    max-height:560px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    touch-action:none;
+    position:relative;
+    cursor:zoom-in;
+  }
+  .lb-stage img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    transition:transform .25s ease;
+    user-select:none;
+    -webkit-user-drag:none;
+  }
+  .lb-stage.zoomed img{ cursor:grab; transition:none; }
+  .lb-stage.zoomed:active img{ cursor:grabbing; }
+  .lb-close{
+    position:absolute;
+    top:20px; right:20px;
+    width:42px; height:42px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
+    color:#fff;
+    font-size:18px;
+    display:flex; align-items:center; justify-content:center;
+    z-index:5;
+  }
+  .lb-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:48px; height:48px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
+    color:#fff;
+    font-size:28px;
+    display:flex; align-items:center; justify-content:center;
+    z-index:5;
+  }
+  .lb-arrow:hover{ background:rgba(255,255,255,0.22); }
+  .lb-prev{ left:16px; }
+  .lb-next{ right:16px; }
+  .lb-dots{
+    display:flex;
+    gap:8px;
+    margin-top:18px;
+  }
+  .lb-dots span{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.3);
+    transition:background .2s ease, transform .2s ease;
+  }
+  .lb-dots span.active{ background:#fff; transform:scale(1.3); }
+  .lb-caption{
+    color:#fff;
+    font-weight:700;
+    font-family:'Fredoka', sans-serif;
+    margin-top:14px;
+    font-size:17px;
+    text-align:center;
+    padding:0 20px;
+  }
+  .lb-hint{
+    color:rgba(255,255,255,0.5);
+    font-size:12px;
+    margin-top:6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">🇱🇰 Cash on Delivery &amp; Bank Transfer — Islandwide Delivery across Sri Lanka</div>
+
+<header>
+  <div class="nav wrap">
+    <a href="#" class="logo"><img src="logo_e_buy.jpeg" alt="E-BUY Online Store" style="height:84px; width:auto; mix-blend-mode:multiply;"></a>
+    <nav class="nav-links">
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#footer">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.4" fill="white"/><circle cx="17" cy="21" r="1.4" fill="white"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">✨ Tech &amp; Gadgets, Islandwide</div>
+      <h1>Gadgets that make you <span class="accent">smile.</span></h1>
+      <p class="lead">Curated tech and gadgets delivered anywhere in Sri Lanka. Pay when it arrives, or transfer — whatever's easiest for you.</p>
+      <div class="hero-ctas">
+        <a href="#shop" class="btn btn-primary">Shop Gadgets →</a>
+      </div>
+    </div>
+    <div class="blob-field" aria-hidden="true">
+      <div class="blob b1"><svg viewBox="0 0 24 24" fill="none"><path d="M4 15v-3a8 8 0 0 1 16 0v3" stroke="#3D5AFE" stroke-width="2" stroke-linecap="round"/><rect x="2" y="14" width="5" height="7" rx="2" fill="#3D5AFE"/><rect x="17" y="14" width="5" height="7" rx="2" fill="#3D5AFE"/></svg></div>
+      <div class="blob b2"><svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2" width="12" height="20" rx="3" stroke="#FF6B6B" stroke-width="2"/><circle cx="12" cy="18" r="1.2" fill="#FF6B6B"/></svg></div>
+      <div class="blob b3"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#8C54FF" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#8C54FF"/></svg></div>
+      <div class="blob b4"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l1.9 4.6L18 9l-4.1 1.4L12 15l-1.9-4.6L6 9l4.1-1.4L12 3z" fill="#2EC4B6"/></svg></div>
+      <div class="blob b5"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="#FFC93C" stroke-width="2"/><path d="M7 10h4" stroke="#FFC93C" stroke-width="2" stroke-linecap="round"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="shop">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <h2>Fresh drops</h2>
+        <p>Tap the + to add straight to your cart.</p>
+      </div>
+    </div>
+    <div class="prod-grid" id="prodGrid"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="usp-grid">
+      <div class="usp-card reveal">
+        <div class="usp-icon" style="background:var(--mint-soft)">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="2" stroke="#2EC4B6" stroke-width="2"/><circle cx="7" cy="15" r="1" fill="#2EC4B6"/></svg>
+        </div>
+        <div>
+          <h3>Cash on Delivery</h3>
+          <p>Pay in cash when your order arrives at your door — no cards, no hassle.</p>
+        </div>
+      </div>
+      <div class="usp-card reveal d1">
+        <div class="usp-icon" style="background:var(--blue-soft)">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 10h18M6 10V6l6-3 6 3v4M5 10v9h14v-9" stroke="#3D5AFE" stroke-width="2" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h3>Bank Transfer</h3>
+          <p>Prefer to pay ahead? Transfer directly and we'll confirm by WhatsApp.</p>
+        </div>
+      </div>
+      <div class="usp-card reveal d2">
+        <div class="usp-icon" style="background:var(--coral-soft)">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 12h13l-3-3m3 3-3 3" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="12" r="1.4" fill="#FF6B6B"/></svg>
+        </div>
+        <div>
+          <h3>Islandwide Delivery</h3>
+          <p>From Colombo to Jaffna to Galle — we ship to every corner of Sri Lanka.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><img src="logo_e_buy.jpeg" alt="E-BUY Online Store" style="height:42px; width:auto; background:#fff; border-radius:8px; padding:4px;"></div>
+        <p>Sri Lanka's playground for gadgets. Curated tech, delivered with a smile — Cash on Delivery or Bank Transfer, your choice.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#shop">All Gadgets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="https://wa.me/94778512367" target="_blank">WhatsApp Us</a></li>
+          <li><a href="#">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 E-BUY Online Store. All rights reserved.</span>
+      <span>Made for Sri Lanka 🇱🇰</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart drawer -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Your Cart</h3>
+    <button class="close-btn" id="closeDrawer">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="drawer-foot">
+    <div class="total-row"><span>Total</span><span class="mono" id="cartTotal">Rs. 0</span></div>
+    <button class="checkout-btn" id="checkoutBtn" disabled>Checkout</button>
+  </div>
+</div>
+
+<!-- Checkout modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="closeModal">✕</button>
+    <h3>Complete your order</h3>
+    <p class="sub">We'll send this straight to E-BUY on WhatsApp.</p>
+    <div class="field">
+      <label for="custName">Full name</label>
+      <input type="text" id="custName" placeholder="Kasun Perera">
+    </div>
+    <div class="field">
+      <label for="custPhone">Phone number</label>
+      <input type="tel" id="custPhone" placeholder="077 123 4567">
+    </div>
+    <div class="field">
+      <label for="custAddress">Delivery address</label>
+      <textarea id="custAddress" rows="2" placeholder="House no, street, town"></textarea>
+    </div>
+    <div class="field">
+      <label for="custCity">City / District</label>
+      <input type="text" id="custCity" placeholder="Colombo">
+    </div>
+    <div class="field">
+      <label>Payment method</label>
+      <div class="pay-options">
+        <div class="pay-opt active" data-pay="COD">💵 Cash on Delivery</div>
+        <div class="pay-opt" data-pay="Bank">🏦 Bank Transfer</div>
+      </div>
+      <div class="bank-details" id="bankDetails">
+        <strong>Bank Transfer Details</strong><br><br>
+        Bank Name: <span id="bdBankName">HNB (Hatton National Bank)</span><br>
+        Account Name: <span id="bdAccName">RM Rumais</span><br>
+        Account Number: <span id="bdAccNo">211020078072</span><br>
+        Branch: <span id="bdBranch">Kattankudy</span><br><br>
+        Please send the payment slip on WhatsApp after transferring.
+      </div>
+    </div>
+    <button class="place-btn" id="placeOrderBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.1-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 1.9 3 4.7 4.1.7.3 1.2.4 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.5-.3z"/></svg>
+      Send Order on WhatsApp
+    </button>
+  </div>
+</div>
+
+<script>
+  const products = [
+    {id:9, name:"Stand Out Skeleton Watch", cat:"Wearables", price:1650, color:"blue", img:"watch_stand_out.jpeg", tag:"Only Rs. 1,650"},
+    {id:15, name:"Magic Practice Copy Book (Set of 4)", cat:"Kids & Learning", price:990, color:"yellow", img:"magic-copybook.jpeg", tag:"Free Delivery"},
+    {id:16, name:"Arabic Elegance Watch Pair", cat:"Wearables", price:990, color:"grape", img:"arabic-watch-pair.jpeg", tag:"Best Price"},
+    {id:17, name:"Gel Balls for Blaster (5000pcs)", cat:"Toys", price:250, color:"blue", img:"gel-balls.jpeg"},
+    {id:18, name:"Gel Blaster Gun — MP5 / M416 / AK47", cat:"Toys", price:4990, color:"coral", img:"gel-blaster-gun.jpeg", tag:"Hot"},
+    {id:19, name:"G360 Assault Rifle Gel Blaster", cat:"Toys", price:6500, color:"mint", img:"g360-assault-rifle.jpeg", tag:"Real Smoke"},
+    {id:20, name:"Smart SIX Drone", cat:"Toys", price:13500, color:"grape", img:"smart-six-drone.jpeg", tag:"Limited Time"},
+    {id:21, name:"K100 MAX Smart Drone", cat:"Toys", price:12000, color:"blue", img:"k100max-drone.jpeg"},
+    {id:22, name:"E99 Drone", cat:"Toys", price:7950, color:"mint", img:"e99-drone.jpeg", tag:"Special Price"},
+    {id:23, name:"Fighter RC Drone", cat:"Toys", price:5500, color:"coral", img:"fighter-rc-drone.jpeg"},
+    {id:24, name:"Crown L50 Series 11 Smart Watch", cat:"Wearables", price:1950, color:"grape", img:"crown-l50-watch.jpeg", tag:"Special Offer"}
+  ].map(p => ({...p, images: p.images || [p.img]}));
+
+  const softMap = {blue:'var(--blue-soft)', coral:'var(--coral-soft)', grape:'var(--grape-soft)', mint:'var(--mint-soft)', yellow:'var(--yellow-soft)'};
+
+  const grid = document.getElementById('prodGrid');
+  grid.innerHTML = products.map((p,i) => `
+    <div class="prod-card reveal d${(i % 3)}" data-id="${p.id}">
+      <div class="prod-media zoomable" style="background:${softMap[p.color]}" data-id="${p.id}">
+        ${p.tag ? `<span class="tag">${p.tag}</span>` : ''}
+        ${p.img ? `<img src="${p.img}" alt="${p.name}">` : `<svg viewBox="0 0 24 24" fill="none">${p.icon}</svg>`}
+        <span class="zoom-hint">🔍 Tap to view</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-cat">${p.cat}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-bottom">
+          <span class="price mono">Rs. ${p.price.toLocaleString()}</span>
+          <button class="add-btn" data-id="${p.id}">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Cart state
+  let cart = {};
+
+  function updateCartUI(){
+    const items = Object.values(cart);
+    const count = items.reduce((s,i)=>s+i.qty,0);
+    document.getElementById('cartCount').textContent = count;
+    const cartItemsEl = document.getElementById('cartItems');
+    if(items.length === 0){
+      cartItemsEl.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Add some gadgets to get started!</div>';
+      document.getElementById('checkoutBtn').disabled = true;
+    } else {
+      cartItemsEl.innerHTML = items.map(i => `
+        <div class="cart-row" data-id="${i.id}">
+          <div class="thumb" style="background:${softMap[i.color]}; overflow:hidden;">${i.img ? `<img src="${i.img}" alt="${i.name}" style="width:100%;height:100%;object-fit:cover;">` : `<svg viewBox="0 0 24 24" fill="none">${i.icon}</svg>`}</div>
+          <div class="info">
+            <div class="name">${i.name}</div>
+            <div class="price mono">Rs. ${i.price.toLocaleString()}</div>
+          </div>
+          <div class="qty-ctrl">
+            <button class="qty-dec">−</button>
+            <span>${i.qty}</span>
+            <button class="qty-inc">+</button>
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('checkoutBtn').disabled = false;
+    }
+    const total = items.reduce((s,i)=>s+i.qty*i.price,0);
+    document.getElementById('cartTotal').textContent = 'Rs. ' + total.toLocaleString();
+  }
+
+  grid.addEventListener('click', e => {
+    const zoomTarget = e.target.closest('.zoomable');
+    if(zoomTarget){
+      openLightbox(zoomTarget.dataset.id);
+      return;
+    }
+    const btn = e.target.closest('.add-btn');
+    if(!btn) return;
+    const id = btn.dataset.id;
+    const p = products.find(p => p.id == id);
+    if(cart[id]){ cart[id].qty += 1; } else { cart[id] = {...p, qty:1}; }
+    updateCartUI();
+    openDrawer();
+    const cartBtn = document.getElementById('cartBtn');
+    cartBtn.classList.remove('bounce');
+    void cartBtn.offsetWidth;
+    cartBtn.classList.add('bounce');
+  });
+
+  document.getElementById('cartItems').addEventListener('click', e => {
+    const row = e.target.closest('.cart-row');
+    if(!row) return;
+    const id = row.dataset.id;
+    if(e.target.classList.contains('qty-inc')) cart[id].qty += 1;
+    if(e.target.classList.contains('qty-dec')){
+      cart[id].qty -= 1;
+      if(cart[id].qty <= 0) delete cart[id];
+    }
+    updateCartUI();
+  });
+
+  const overlay = document.getElementById('overlay');
+  const drawer = document.getElementById('drawer');
+  function openDrawer(){ overlay.classList.add('show'); drawer.classList.add('show'); }
+  function closeDrawer(){ overlay.classList.remove('show'); drawer.classList.remove('show'); }
+  document.getElementById('cartBtn').addEventListener('click', openDrawer);
+  document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  // Checkout modal
+  const modalOverlay = document.getElementById('modalOverlay');
+  let payMethod = 'COD';
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    modalOverlay.classList.add('show');
+  });
+  document.getElementById('closeModal').addEventListener('click', () => modalOverlay.classList.remove('show'));
+
+  document.querySelectorAll('.pay-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.pay-opt').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      payMethod = opt.dataset.pay;
+      document.getElementById('bankDetails').classList.toggle('show', payMethod === 'Bank');
+    });
+  });
+
+  document.getElementById('placeOrderBtn').addEventListener('click', () => {
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const address = document.getElementById('custAddress').value.trim();
+    const city = document.getElementById('custCity').value.trim();
+
+    if(!name || !phone || !address || !city){
+      alert('Please fill in all your details so we can deliver your order.');
+      return;
+    }
+
+    const items = Object.values(cart);
+    const total = items.reduce((s,i)=>s+i.qty*i.price,0);
+    const itemLines = items.map(i => `- ${i.name} x${i.qty} — Rs. ${(i.price*i.qty).toLocaleString()}`).join('%0A');
+    const bankLine = payMethod === 'Bank'
+      ? `%0A%0A*Bank Details:*%0AHNB (Hatton National Bank)%0AAcc Name: RM Rumais%0AAcc No: 211020078072%0ABranch: Kattankudy`
+      : '';
+
+    const message =
+      `*New Order — E-BUY Online Store*%0A%0A` +
+      `*Customer:* ${encodeURIComponent(name)}%0A` +
+      `*Phone:* ${encodeURIComponent(phone)}%0A` +
+      `*Address:* ${encodeURIComponent(address)}, ${encodeURIComponent(city)}%0A` +
+      `*Payment:* ${payMethod === 'COD' ? 'Cash on Delivery' : 'Bank Transfer'}%0A%0A` +
+      `*Order Items:*%0A${itemLines}%0A%0A` +
+      `*Total: Rs. ${total.toLocaleString()}*${bankLine}`;
+
+    const waNumber = '94778512367';
+    const url = `https://wa.me/${waNumber}?text=${message}`;
+    window.open(url, '_blank');
+  });
+
+  // ---- Lightbox: slider + zoom + pan ----
+  const lbOverlay = document.getElementById('lightboxOverlay');
+  const lbStage = document.getElementById('lbStage');
+  const lbImage = document.getElementById('lbImage');
+  const lbDots = document.getElementById('lbDots');
+  const lbCaption = document.getElementById('lbCaption');
+  let lbImages = [];
+  let lbIndex = 0;
+  let lbZoomed = false;
+  let panX = 0, panY = 0, dragStartX = 0, dragStartY = 0, dragging = false;
+
+  function openLightbox(id){
+    const p = products.find(p => p.id == id);
+    if(!p) return;
+    lbImages = p.images && p.images.length ? p.images : [p.img];
+    lbIndex = 0;
+    lbCaption.textContent = p.name;
+    renderLbDots();
+    setLbImage();
+    lbOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lbOverlay.classList.remove('show');
+    document.body.style.overflow = '';
+    resetZoom();
+  }
+  function renderLbDots(){
+    lbDots.innerHTML = lbImages.length > 1
+      ? lbImages.map((_, i) => `<span class="${i === lbIndex ? 'active' : ''}" data-i="${i}"></span>`).join('')
+      : '';
+    document.getElementById('lbPrev').style.display = lbImages.length > 1 ? 'flex' : 'none';
+    document.getElementById('lbNext').style.display = lbImages.length > 1 ? 'flex' : 'none';
+  }
+  function setLbImage(){
+    lbImage.src = lbImages[lbIndex];
+    resetZoom();
+    renderLbDots();
+  }
+  function resetZoom(){
+    lbZoomed = false;
+    panX = 0; panY = 0;
+    lbStage.classList.remove('zoomed');
+    lbImage.style.transform = 'translate(0px,0px) scale(1)';
+  }
+  function toggleZoom(clientX, clientY){
+    if(!lbZoomed){
+      lbZoomed = true;
+      lbStage.classList.add('zoomed');
+      lbImage.style.transform = 'translate(0px,0px) scale(2.2)';
+    } else {
+      resetZoom();
+    }
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  lbOverlay.addEventListener('click', e => { if(e.target === lbOverlay) closeLightbox(); });
+  document.getElementById('lbPrev').addEventListener('click', () => { lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; setLbImage(); });
+  document.getElementById('lbNext').addEventListener('click', () => { lbIndex = (lbIndex + 1) % lbImages.length; setLbImage(); });
+  lbDots.addEventListener('click', e => {
+    const dot = e.target.closest('span');
+    if(!dot) return;
+    lbIndex = parseInt(dot.dataset.i);
+    setLbImage();
+  });
+
+  lbStage.addEventListener('click', e => {
+    if(dragging) return;
+    toggleZoom(e.clientX, e.clientY);
+  });
+
+  // Drag to pan when zoomed (mouse)
+  lbStage.addEventListener('mousedown', e => {
+    if(!lbZoomed) return;
+    dragging = true;
+    dragStartX = e.clientX - panX;
+    dragStartY = e.clientY - panY;
+  });
+  window.addEventListener('mousemove', e => {
+    if(!dragging || !lbZoomed) return;
+    panX = e.clientX - dragStartX;
+    panY = e.clientY - dragStartY;
+    lbImage.style.transform = `translate(${panX}px,${panY}px) scale(2.2)`;
+  });
+  window.addEventListener('mouseup', () => { dragging = false; });
+
+  // Touch: swipe to change image, drag to pan when zoomed
+  let touchStartX = 0, touchStartY = 0;
+  lbStage.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    touchStartX = t.clientX; touchStartY = t.clientY;
+    if(lbZoomed){ dragStartX = t.clientX - panX; dragStartY = t.clientY - panY; dragging = true; }
+  }, {passive:true});
+  lbStage.addEventListener('touchmove', e => {
+    if(lbZoomed && dragging){
+      const t = e.touches[0];
+      panX = t.clientX - dragStartX;
+      panY = t.clientY - dragStartY;
+      lbImage.style.transform = `translate(${panX}px,${panY}px) scale(2.2)`;
+    }
+  }, {passive:true});
+  lbStage.addEventListener('touchend', e => {
+    dragging = false;
+    if(lbZoomed) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
+      if(dx < 0 && lbImages.length > 1){ lbIndex = (lbIndex + 1) % lbImages.length; setLbImage(); }
+      else if(dx > 0 && lbImages.length > 1){ lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; setLbImage(); }
+    } else if(Math.abs(dx) < 10 && Math.abs(dy) < 10){
+      toggleZoom(t.clientX, t.clientY);
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if(!lbOverlay.classList.contains('show')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowRight' && lbImages.length > 1){ lbIndex = (lbIndex + 1) % lbImages.length; setLbImage(); }
+    if(e.key === 'ArrowLeft' && lbImages.length > 1){ lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; setLbImage(); }
+  });
+
+  // ---- Scroll reveal ----
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+<!-- Image Lightbox -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lb-close" id="lbClose">✕</button>
+  <div class="lb-stage" id="lbStage">
+    <img id="lbImage" src="" alt="">
+  </div>
+  <button class="lb-arrow lb-prev" id="lbPrev">‹</button>
+  <button class="lb-arrow lb-next" id="lbNext">›</button>
+  <div class="lb-dots" id="lbDots"></div>
+  <div class="lb-caption" id="lbCaption"></div>
+  <div class="lb-hint">Tap image to zoom · drag to pan</div>
+</div>
+
+</body>
+</html>
